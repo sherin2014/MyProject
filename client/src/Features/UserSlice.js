@@ -14,7 +14,7 @@ const initialState = {
 
 export const login = createAsyncThunk("users/login", async (userData) => {
   try {
-    const response = await axios.post("http://localhost:3001/login", {
+    const response = await axios.post("https://myproject-server.onrender.com/login", {
       email: userData.email,
       password: userData.password,
     });
@@ -33,7 +33,7 @@ export const login = createAsyncThunk("users/login", async (userData) => {
 export const logout = createAsyncThunk("/users/logout", async () => {
   try {
     // Send a request to your server to log the user out
-    const response = await axios.post("http://localhost:3001/logout");
+    const response = await axios.post("https://myproject-server.onrender.com/logout");
   } catch (error) {}
 });
 
@@ -42,7 +42,7 @@ export const registerUser = createAsyncThunk("users/registerUser",
   {
     try
     {
-      const response = await axios.post("http://localhost:3001/registerUser",
+      const response = await axios.post("https://myproject-server.onrender.com/registerUser",
         {
           name:userData.name,
           email:userData.email,
@@ -96,7 +96,7 @@ export const updateUserProfile = createAsyncThunk(
   async (formData) => {
     try {
       const response = await axios.put(
-        `http://localhost:3001/updateUserProfile/${formData.get("email")}`,
+        `https://myproject-server.onrender.com/updateUserProfile/${formData.get("email")}`,
         formData,
         {
           headers: {
