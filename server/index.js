@@ -9,13 +9,16 @@ import { dirname } from "path";
 import multer from "multer";
 import path from "path";
 import fs from "fs";
+import * as ENV from "./config.js";
+
 const app = express();
 app.use(express.json());
 app.use(cors());
 
 //Database connection
 const connectString =
-  "mongodb+srv://2014sherinthomas:admin123@postitcluster.hxz1f.mongodb.net/PostITDB?retryWrites=true&w=majority&appName=PostITCluster";
+  `mongodb+srv://${ENV.DB_USER}:${ENV.DB_PASSWORD}@${ENV.DB_CLUSTER}/${ENV.DB_NAME}?retryWrites=true&w=majority&appName=Database`;
+
 
 mongoose.connect(connectString, {
   useNewUrlParser: true,
@@ -239,6 +242,6 @@ app.put("/updateUserProfile/:email/",   upload.single("profilePic"),
 
 });
 
-app.listen(3001, () => {
-  console.log("You are connected");
+app.listen(ENV.PORT || 3001, () => {
+  console.log("You are connected at port: " + (ENV.PORT || 3001));
 });
